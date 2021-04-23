@@ -52,6 +52,9 @@ $Promise.prototype._callHandlers = function () {
     }
   }
 };
+$Promise.prototype.catch = function (errorCb) {
+  this.then(null, errorCb);
+};
 
 module.exports = $Promise;
 /*-------------------------------------------------------
