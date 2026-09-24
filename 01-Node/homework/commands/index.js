@@ -1,1 +1,1 @@
-module.exports = {};
+module.exports = {date: function showDate() {process.stdout.write(Date())}};
