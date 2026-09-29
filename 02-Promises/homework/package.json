@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest exercise-one.spec.js",
+    "test": "jest exercise-two.spec.js",
     "grade": "jest --useStderr --json --outputFile=./result.json"
   },
   "author": "",
