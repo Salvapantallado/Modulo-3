@@ -145,22 +145,36 @@ function problemC() {
   });
 
   // callback version
-  async.eachSeries(
-    filenames,
-    function (filename, eachDone) {
-      readFile(filename, function (err, stanza) {
-        console.log("-- C. callback version --");
-        blue(stanza);
-        eachDone();
-      });
-    },
-    function (err) {
-      console.log("-- C. callback version done --");
-    },
-  );
+  // async.eachSeries(
+  //   filenames,
+  //   function (filename, eachDone) {
+  //     readFile(filename, function (err, stanza) {
+  //       console.log("-- C. callback version --");
+  //       blue(stanza);
+  //       eachDone();
+  //     });
+  //   },
+  //   function (err) {
+  //     console.log("-- C. callback version done --");
+  //   },
+  // );
 
   // promise version
-  // ???
+  Promise.all(
+  filenames.map(function (filename) {
+    return promisifiedReadFile(filename);
+  })
+)
+.then(function (stanzas) {
+
+  stanzas.forEach(function (stanza) {
+    console.log("-- B. promise version --");
+    blue(stanza);
+  });
+
+  console.log("-- B. promise version done --");
+
+});
 }
 
 function problemD() {
@@ -181,24 +195,57 @@ function problemD() {
   filenames[randIdx] = "wrong-file-name-" + (randIdx + 1) + ".txt";
 
   // callback version
-  async.eachSeries(
-    filenames,
-    function (filename, eachDone) {
-      readFile(filename, function (err, stanza) {
-        console.log("-- D. callback version --");
-        if (err) return eachDone(err);
-        blue(stanza);
-        eachDone();
-      });
-    },
-    function (err) {
-      if (err) magenta(new Error(err));
-      console.log("-- D. callback version done --");
-    },
-  );
+  // async.eachSeries(
+  //   filenames,
+  //   function (filename, eachDone) {
+  //     readFile(filename, function (err, stanza) {
+  //       console.log("-- D. callback version --");
+  //       if (err) return eachDone(err);
+  //       blue(stanza);
+  //       eachDone();
+  //     });
+  //   },
+  //   function (err) {
+  //     if (err) magenta(new Error(err));
+  //     console.log("-- D. callback version done --");
+  //   },
+  // );
 
   // promise version
-  // ???
+function readNext(index) {
+    if (index >= filenames.length) {
+      console.log("done");
+      return Promise.resolve();
+    }
+
+    return promisifiedReadFile(filenames[index])
+      .then(function (stanza) {
+        console.log("-- D. promise version --");
+        blue(stanza);
+
+        return readNext(index + 1);
+      });
+  }
+
+  readNext(0)
+    .catch(function (err) {
+      magenta(new Error(err));
+      console.log("done");
+    });
+  
+//     Promise.all(
+//   filenames.map(function (filename) {
+//     return promisifiedReadFile(filename)
+//   }))
+// .then(function (stanzas) {
+//   stanzas.forEach(function (stanza) {
+//     console.log("-- D. promise version --");
+//     blue(stanza);
+//   });
+// }).then(console.log("done"))
+// .catch(function(err){
+//   magenta(new Error(err))
+// })
 }
 
 function problemE() {
