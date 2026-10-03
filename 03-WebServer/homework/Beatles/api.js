@@ -1,4 +1,4 @@
-var beatles=[{
+export const beatles=[{
   name: "John Lennon",
   birthdate: "09/10/1940",
   profilePic:"https://imgs.search.brave.com/vGHY1jCRD-UyVK6StXh-BI6KaH4xgPfpn0VETPio_nU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/d2hhdHMtdGhlLWNv/b2xlc3QtcGhvdG8t/b2Ytam9obi1sZW5u/b24tdjAtcWlsN3Fq/Z2x6NTRjMS5qcGVn/P3dpZHRoPTM4NCZm/b3JtYXQ9cGpwZyZh/dXRvPXdlYnAmcz0w/MTQ1YmVlY2M4NDUy/NzgxODQ5MjI3OGQ5/MWQzMjI5N2I0ZGU2/OTkz"
