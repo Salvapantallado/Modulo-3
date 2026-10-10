@@ -17,7 +17,7 @@ describe('Test de APIS', () => {
     it('responds with 200', () => agent.get('/test').expect(200));
     it('responds with and object with message `test`', () =>
       agent.get('/test').then((res) => {
-        expect(res.body.message).to.be.equal('hola');
+        expect(res.body.message).to.be.equal('test');
       }));
   });
 
@@ -44,8 +44,9 @@ describe('Test de APIS', () => {
   });
 
   describe('POST /sumArray', () => {
-    it('responds with 200', () => agent.get('/test').expect(200));
-    it('responds with and object with message `test`', () =>
+    it('responds with 200', () => agent.get('/sumArray').expect(200));
+    it('does not use the same number twice', () => agent.post('/sumArray'))
+    it('responds with and object with message `sum`', () => agent.post()
       agent.post('/sumArray')
         .send({array: [2,5,7,10,11,15,20], num: 13})
         .then((res) => {
